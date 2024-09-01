@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head.ejs') %>
+        <title>Sign Up</title>
+
+        <style>
+            input {
+                display: block;
+                margin-bottom: 1em;
+            }
+
+            button {
+                border: solid 1px black;
+            }
+
+            form{
+                width: 50vw;
+                margin: auto;
+            }
+        </style>
+
+<body>
+    <%- include('./partials/nav') %>
+        <form action="/user/signup" method="post">
+            <div class="row mb-3 mt-5">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-10">
+                    <input type="text" name="username" class="form-control" id="inputEmail3">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" name="email" class="form-control" id="inputEmail3">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" name="password" class="form-control" id="inputPassword3">
+                </div>
+            </div>
+            <fieldset class="row mb-3">
+                <legend class="col-form-label col-sm-2 pt-0">Role</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input " type="radio" name="role" id="gridRadios1" value="USER"
+                            checked>
+                        <label class="form-check-label" for="gridRadios1">
+                            USER
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="role" id="gridRadios2" value="ADMIN">
+                        <label class="form-check-label" for="gridRadios2">
+                            ADMIN
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <button type="submit" class="btn btn-dark ">Sign in</button>
+        </form>
+        <%- include('./partials/script.ejs') %>
+</body>
+
+</html>
