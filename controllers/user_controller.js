@@ -2,7 +2,7 @@ const User = require('../models/user_model');
 
 //SIGN UP
 async function handleGetSignUpPage(req, res) {
-    return res.render('signup');
+    return res.render('signin');
 }
 
 async function handleUserSignUp(req, res) {
@@ -28,15 +28,25 @@ async function handleUserSignUp(req, res) {
 }
 
 //SIGN IN
-async function handleGetSignIpPage(req, res) {
-    return res.render('homepage');
+async function handleGetSignInPage(req, res) {
+    return res.render('signin');
 }
 
-async function handleUserSignIn(req, res) {
 
+async function handleUserSignIn(req, res) {
+    try{
+        const { email, password } = req.body;
+        const user = User.matchPassword(email, password);
+        
+        return res.render('homepage');
+    }catch(err){
+        return res.render('signup');
+    }
 }
 
 module.exports = {
     handleGetSignUpPage,
-    handleUserSignUp
+    handleUserSignUp,
+    handleGetSignInPage,
+    handleUserSignIn
 }

@@ -2,7 +2,9 @@ const express = require('express');
 const Router = express.Router();
 const {
     handleGetSignUpPage,
-    handleUserSignUp
+    handleUserSignUp,
+    handleGetSignInPage,
+    handleUserSignIn
 } = require('../controllers/user_controller');
 
 Router.route('/signup')
@@ -10,7 +12,7 @@ Router.route('/signup')
 .post(handleUserSignUp)
 
 Router.route('/signin')
-.get(handleGetSignUpPage)
-.post(handleUserSignUp)
+.get(handleGetSignInPage)
+.post(handleUserSignIn)
 
 module.exports = Router;

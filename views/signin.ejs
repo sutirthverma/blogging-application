@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head.ejs') %>
+        <title>Sign Up</title>
+
+        <style>
+            input {
+                display: block;
+                margin-bottom: 1em;
+            }
+
+            button {
+                border: solid 1px black;
+            }
+
+            form{
+                width: 50vw;
+                margin: auto;
+            }
+        </style>
+
+<body>
+    <%- include('./partials/nav') %>
+        <form action="/user/signin" method="post">
+            <div class="row mb-3 mt-4">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" name="email" class="form-control" id="inputEmail3">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" name="password" class="form-control" id="inputPassword3">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-dark ">Sign In</button>
+        </form>
+        <%- include('./partials/script.ejs') %>
+</body>
+
+</html>
