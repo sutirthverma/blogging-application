@@ -1,4 +1,8 @@
 const User = require('../models/user_model');
+const {
+    createTokenForUser
+} = require('../services/authentication');
+
 
 //SIGN UP
 async function handleGetSignUpPage(req, res) {
@@ -17,9 +21,9 @@ async function handleUserSignUp(req, res) {
             password,
             role
         });
+        res.cookie('token', token);
 
-        console.log(user);
-        return res.render('homepage');
+        return res.redirect('/');
     } catch (err) {
         console.log(err.message);
         return res.status(400).json({ message: err.message })
@@ -36,10 +40,13 @@ async function handleGetSignInPage(req, res) {
 async function handleUserSignIn(req, res) {
     try{
         const { email, password } = req.body;
-        const user = User.matchPassword(email, password);
-        
+        const token = await User.matchPasswordAndGenerateToken(email, password);
+
+        console.log(token);                        
         return res.render('homepage');
     }catch(err){
+        console.log(err.message);
+        
         return res.render('signup');
     }
 }
