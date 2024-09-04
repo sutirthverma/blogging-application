@@ -2,7 +2,6 @@ const JWT = require('jsonwebtoken');
 const secret = process.env.SECRET_KEY;
 
 function createTokenForUser(user){
-    console.log(secret);
     
     const payload = {
         id: user._id,
@@ -14,13 +13,13 @@ function createTokenForUser(user){
     return JWT.sign(payload, secret);
 }
 
-function getToken(token){
+function validateToken(token){
     if(!token) return null;
 
-    return JWT.verify(token);
+    return JWT.verify(token, secret);
 }
 
 module.exports = {
     createTokenForUser,
-    getToken
+    validateToken
 }

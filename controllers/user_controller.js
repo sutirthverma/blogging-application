@@ -6,7 +6,7 @@ const {
 
 //SIGN UP
 async function handleGetSignUpPage(req, res) {
-    return res.render('signin');
+    return res.render('signup');
 }
 
 async function handleUserSignUp(req, res) {
@@ -21,9 +21,8 @@ async function handleUserSignUp(req, res) {
             password,
             role
         });
-        res.cookie('token', token);
 
-        return res.redirect('/');
+        return res.redirect('signin');
     } catch (err) {
         console.log(err.message);
         return res.status(400).json({ message: err.message })
@@ -41,19 +40,27 @@ async function handleUserSignIn(req, res) {
     try{
         const { email, password } = req.body;
         const token = await User.matchPasswordAndGenerateToken(email, password);
+        const user = await User.findOne({email});
 
-        console.log(token);                        
-        return res.render('homepage');
+        return res.cookie('token', token).redirect('/');
     }catch(err){
         console.log(err.message);
         
-        return res.render('signup');
+        return res.render('signin', {
+            error: "Incorrect email or password"
+        });
     }
+}
+
+//SIGN OUT
+async function handleUserSignOut(req, res) {
+    return res.clearCookie('token').redirect('/');
 }
 
 module.exports = {
     handleGetSignUpPage,
     handleUserSignUp,
     handleGetSignInPage,
-    handleUserSignIn
+    handleUserSignIn,
+    handleUserSignOut
 }

@@ -4,7 +4,8 @@ const {
     handleGetSignUpPage,
     handleUserSignUp,
     handleGetSignInPage,
-    handleUserSignIn
+    handleUserSignIn,
+    handleUserSignOut
 } = require('../controllers/user_controller');
 
 Router.route('/signup')
@@ -14,5 +15,8 @@ Router.route('/signup')
 Router.route('/signin')
 .get(handleGetSignInPage)
 .post(handleUserSignIn)
+
+Router.route('/signout')
+.get(handleUserSignOut)
 
 module.exports = Router;
