@@ -1,12 +1,14 @@
+require('dotenv').config();
+
 const express = require('express');
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 const app = express();
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const Blog = require('./models/blogs_model');
 
-//Routers
+//Routers 
 const userRouter = require('./routes/user_router');
 const blogRouter = require('./routes/blog_router');
 
@@ -15,7 +17,7 @@ const {
 } = require('./connection');
 const { checkForAuthCookie } = require('./middlewares/auth_middleware');
 
-makeConnection('mongodb://localhost:27017/blogging-app')
+makeConnection(process.env.MONGO_URL)
 .then(() => console.log(`Connected to Database`))
 
 app.set('view engine', 'ejs');
