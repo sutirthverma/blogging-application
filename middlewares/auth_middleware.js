@@ -4,7 +4,6 @@ function checkForAuthCookie(cookieName){
     return (req, res, next) => {
 
         const tokenCookieValue = req.cookies[cookieName];
-        console.log(tokenCookieValue);        
 
         if(!tokenCookieValue){
             return next();
@@ -12,7 +11,6 @@ function checkForAuthCookie(cookieName){
 
         try{
             const userPayload = validateToken(tokenCookieValue);
-            console.log(userPayload);   
             req.user = userPayload;
         }catch(err){
             console.log(err.message);

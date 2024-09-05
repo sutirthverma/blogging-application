@@ -13,14 +13,20 @@ const upload = multer({storage});
 
 const Router = express.Router();
 const {
-    handleGetAddBlogPage,
-    handleAddBlog
+    handleGetBlog,
+    handleGetAddBlogPage, 
+    handleAddBlog,
+    handleAddComment
 } = require('../controllers/blog_controller');
+
+Router.route('/view/:id')
+.get(handleGetBlog)
 
 Router.route('/add')
 .get(handleGetAddBlogPage)
 .post(upload.single('coverImage'),handleAddBlog)
-//.post(handleAddBlog)
 
+Router.route('/comment/:blogId')
+.post(handleAddComment)
 
 module.exports = Router;
